@@ -448,6 +448,7 @@ function checkPackages(packages, github) {
                             kind: 'not-a-workspace-member',
                             message: `Package '${package_name}' dependes from internal '${dependency_name}' which is not a workspace member. Listed workspace members only will be published`
                         });
+                        continue;
                     }
                     const dependency_path = (0, path_1.normalize)((0, path_1.join)(package_info.path, dependency.path));
                     (0, core_1.info)("dependency_path: " + dependency_path);
