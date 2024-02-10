@@ -1,4 +1,5 @@
 import {dirname, join, normalize, relative} from 'path'
+import {info} from '@actions/core'
 import {exec} from '@actions/exec'
 
 import {GitHubHandle, lastCommitDate} from './github'
@@ -171,6 +172,8 @@ export async function checkPackages(
 
     for (const package_name in packages) {
         const package_info = packages[package_name]
+
+        info(JSON.stringify(package_info, null, '  '))
 
         if (!isver(package_info.version)) {
             errors.push({

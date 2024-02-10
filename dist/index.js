@@ -308,6 +308,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.sortPackages = exports.checkPackages = exports.findPackages = void 0;
 const path_1 = __nccwpck_require__(1017);
+const core_1 = __nccwpck_require__(2186);
 const exec_1 = __nccwpck_require__(1514);
 const github_1 = __nccwpck_require__(5928);
 const utils_1 = __nccwpck_require__(918);
@@ -392,6 +393,7 @@ function checkPackages(packages, github) {
         const errors = [];
         for (const package_name in packages) {
             const package_info = packages[package_name];
+            (0, core_1.info)(JSON.stringify(package_info, null, '  '));
             if (!(0, utils_1.isver)(package_info.version)) {
                 errors.push({
                     name: package_name,
