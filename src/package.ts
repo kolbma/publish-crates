@@ -230,6 +230,7 @@ export async function checkPackages(
             if (dependency.path) {
                 // internal dependency
                 const dependency_package = packages[dependency_name]
+                info(JSON.stringify(dependency_package, null, '  '))
                 if (!dependency_package) {
                     errors.push({
                         name: package_name,
@@ -240,6 +241,7 @@ export async function checkPackages(
                 const dependency_path = normalize(
                     join(package_info.path, dependency.path)
                 )
+                info("dependency_path: " + dependency_path)
                 if (dependency_path !== dependency_package.path) {
                     errors.push({
                         name: package_name,

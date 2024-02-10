@@ -441,6 +441,7 @@ function checkPackages(packages, github) {
                 if (dependency.path) {
                     // internal dependency
                     const dependency_package = packages[dependency_name];
+                    (0, core_1.info)(JSON.stringify(dependency_package, null, '  '));
                     if (!dependency_package) {
                         errors.push({
                             name: package_name,
@@ -449,6 +450,7 @@ function checkPackages(packages, github) {
                         });
                     }
                     const dependency_path = (0, path_1.normalize)((0, path_1.join)(package_info.path, dependency.path));
+                    (0, core_1.info)("dependency_path: " + dependency_path);
                     if (dependency_path !== dependency_package.path) {
                         errors.push({
                             name: package_name,
