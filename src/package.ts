@@ -1,5 +1,4 @@
 import {dirname, join, normalize, relative} from 'path'
-import {info} from '@actions/core'
 import {exec} from '@actions/exec'
 
 import {GitHubHandle, lastCommitDate} from './github'
@@ -173,8 +172,6 @@ export async function checkPackages(
     for (const package_name in packages) {
         const package_info = packages[package_name]
 
-        info(JSON.stringify(package_info, null, '  '))
-
         if (!isver(package_info.version)) {
             errors.push({
                 name: package_name,
@@ -224,16 +221,13 @@ export async function checkPackages(
         )
 
         for (const dependency_name in package_info.dependencies) {
-            info("dependency: " + dependency_name)
             const dependency = package_info.dependencies[dependency_name]
-            info(JSON.stringify(dependency, null, '  '))
             if (dependency.kind === 'dev') {
                 continue
             }
             if (dependency.path) {
                 // internal dependency
                 const dependency_package = packages[dependency_name]
-                info(JSON.stringify(dependency_package, null, '  '))
                 if (!dependency_package) {
                     errors.push({
                         name: package_name,
@@ -245,7 +239,6 @@ export async function checkPackages(
                 const dependency_path = normalize(
                     join(package_info.path, dependency.path)
                 )
-                info("dependency_path: " + dependency_path)
                 if (dependency_path !== dependency_package.path) {
                     errors.push({
                         name: package_name,
