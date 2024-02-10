@@ -113,6 +113,7 @@ async function run(): Promise<void> {
                 if (no_verify) {
                     exec_args.push('--no-verify')
                 }
+                info(JSON.stringify(package_info, null, '  '))
                 const exec_opts: ExecOptions = {
                     cwd: package_info.path,
                     env
