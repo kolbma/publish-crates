@@ -224,7 +224,9 @@ export async function checkPackages(
         )
 
         for (const dependency_name in package_info.dependencies) {
+            info("dependency: " + dependency_name)
             const dependency = package_info.dependencies[dependency_name]
+            info(JSON.stringify(dependency, null, '  '))
             if (dependency.path) {
                 // internal dependency
                 const dependency_package = packages[dependency_name]
