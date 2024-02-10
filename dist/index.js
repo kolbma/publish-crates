@@ -253,7 +253,6 @@ function run() {
                     if (no_verify) {
                         exec_args.push('--no-verify');
                     }
-                    (0, core_1.info)(JSON.stringify(package_info, null, '  '));
                     const exec_opts = {
                         cwd: package_info.path,
                         env
@@ -308,7 +307,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.sortPackages = exports.checkPackages = exports.findPackages = void 0;
 const path_1 = __nccwpck_require__(1017);
-const core_1 = __nccwpck_require__(2186);
 const exec_1 = __nccwpck_require__(1514);
 const github_1 = __nccwpck_require__(5928);
 const utils_1 = __nccwpck_require__(918);
@@ -393,7 +391,6 @@ function checkPackages(packages, github) {
         const errors = [];
         for (const package_name in packages) {
             const package_info = packages[package_name];
-            (0, core_1.info)(JSON.stringify(package_info, null, '  '));
             if (!(0, utils_1.isver)(package_info.version)) {
                 errors.push({
                     name: package_name,
@@ -435,16 +432,13 @@ function checkPackages(packages, github) {
                 }
             }))());
             for (const dependency_name in package_info.dependencies) {
-                (0, core_1.info)("dependency: " + dependency_name);
                 const dependency = package_info.dependencies[dependency_name];
-                (0, core_1.info)(JSON.stringify(dependency, null, '  '));
                 if (dependency.kind === 'dev') {
                     continue;
                 }
                 if (dependency.path) {
                     // internal dependency
                     const dependency_package = packages[dependency_name];
-                    (0, core_1.info)(JSON.stringify(dependency_package, null, '  '));
                     if (!dependency_package) {
                         errors.push({
                             name: package_name,
@@ -454,7 +448,6 @@ function checkPackages(packages, github) {
                         continue;
                     }
                     const dependency_path = (0, path_1.normalize)((0, path_1.join)(package_info.path, dependency.path));
-                    (0, core_1.info)("dependency_path: " + dependency_path);
                     if (dependency_path !== dependency_package.path) {
                         errors.push({
                             name: package_name,
